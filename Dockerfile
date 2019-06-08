@@ -4,8 +4,11 @@
 FROM abiosoft/caddy:builder as builder
 
 ARG version="1.0.0"
-ARG plugins="git,cors,realip,expires,cache"
+ARG plugins="git,cors,realip,expires,cache,filebrowser"
 ARG enable_telemetry="true"
+
+ARG GOARCH=arm
+ARG GOARM=7
 
 # process wrapper
 RUN go get -v github.com/abiosoft/parent
@@ -15,7 +18,7 @@ RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=${enable_telemetry} /
 #
 # Final stage
 #
-FROM alpine:3.8
+FROM arm32v7/alpine
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
 ARG version="1.0.0"
