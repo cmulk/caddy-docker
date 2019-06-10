@@ -52,7 +52,7 @@ COPY Caddyfile /etc/Caddyfile
 COPY index.html /srv/index.html
 
 # install process wrapper
-COPY --from=builder /go/bin/parent /bin/parent
+COPY --from=builder /go/bin/linux_arm/parent /bin/parent
 
 ENTRYPOINT ["/bin/parent", "caddy"]
 CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
