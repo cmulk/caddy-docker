@@ -1,7 +1,12 @@
 #
 # Builder
 #
-FROM abiosoft/caddy:builder as builder
+
+FROM golang:1.12.4-alpine
+
+RUN apk add --no-cache git gcc musl-dev
+
+COPY builder/builder.sh /usr/bin/builder.sh
 
 ARG version="1.0.0"
 ARG plugins="git,cors,realip,expires,cache"
